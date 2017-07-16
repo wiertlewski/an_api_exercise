@@ -141,6 +141,32 @@ Remove user API endpoint.
 
 * User with requested identifier not found
 
+## Vagrant
+
+Use vagrant as alternative for local development.
+
+``` bash
+$ cd vagrantfile
+$ vagrant up
+```
+
+Run create_database task to create local (vagrant) database.
+
+``` bash
+$ php tasks/create_database.php 192.168.79.79 root password
+```
+
+Point to new host in database config in /config/development/settings.php
+
+```
+'database' => [
+    'host' => '192.168.79.79',
+    'dbname' => 'an_api_exercise',
+    'username' => 'root',
+    'password' => 'password',
+],
+```
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
