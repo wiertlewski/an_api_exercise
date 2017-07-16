@@ -3,5 +3,8 @@ vendor
 docker/databases/*
 !docker/databases/.gitkeep
 
+logs/*
+!logs/.gitkeep
+
 docker/logs/nginx/*
 !docker/logs/nginx/.gitkeep
