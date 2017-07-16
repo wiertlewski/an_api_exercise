@@ -19,6 +19,7 @@ final class UpdateUserActionTest extends AbstractTestCase
 
         $userTable = \Mockery::mock('UserTable');
         $userTable->shouldReceive('getById')->times(1)->with($identifier)->andReturn(true);
+        $userTable->shouldReceive('getByEmail')->times(1)->with($parsedBody['email'])->andReturn(['id' => $identifier]);
         $userTable->shouldReceive('update')->times(1)->with($parsedBody, $identifier)->andReturn(true);
 
         $request = $this->getRequest('PUT', '/user/' . $identifier);
