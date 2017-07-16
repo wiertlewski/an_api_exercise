@@ -1,0 +1,6 @@
+
+docker/databases/*
+!docker/databases/.gitkeep
+
+docker/logs/nginx/*
+!docker/logs/nginx/.gitkeep
