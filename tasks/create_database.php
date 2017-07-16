@@ -1,5 +1,14 @@
 <?php
 
+$host = isset($argv[1]) ? $argv[1] : false;
+$username = isset($argv[2]) ? $argv[2] : false;
+$password = isset($argv[3]) ? $argv[3] : false;
+
+if (!$host || !$username || !$password) {
+    echo 'Usage:' . PHP_EOL . 'php ' . $argv[0] . ' $host $username $password' . PHP_EOL;
+    exit();
+}
+
 $pdo = new \Pdo('mysql:host=127.0.0.1;charset=utf8', 'root', 'password', [
     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
 ]);

@@ -18,7 +18,7 @@ $ docker-compose up
 Run create_database task to create local (docker) database.
 
 ``` bash
-$ php tasks/create_database.php
+$ php tasks/create_database.php 127.0.0.1 root password
 ```
 
 ## Basic Token Authorization
