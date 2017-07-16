@@ -27,7 +27,7 @@ class DbHelper extends \Pdo
         $sql = sprintf('SELECT * FROM %s WHERE %2$s = :%2$s;', $table, $key);
         $query = $this->execute($sql, array($key => $value));
 
-        return $query ? $query->fetchAll() : false;
+        return $query ? $query->fetch() : false;
     }
 
     public function insert(string $table, array $data)

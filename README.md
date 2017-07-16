@@ -120,6 +120,7 @@ payload: `{ "email": "test@tester.com", "forename": "New", "surname": "Tester" }
 * Invalid forename. Only letters and white space allowed.
 * Invalid surname. Only letters and white space allowed.
 * User with requested identifier not found
+* User with requested email already exists
 
 ## Delete User
 

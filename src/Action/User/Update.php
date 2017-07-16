@@ -18,11 +18,22 @@ class Update
             throw new ApiException('Echo');
         }
 
+        $this->emailMustBeUnique($container->userTable, $validatedBody['email'], $arguments['id']);
+
         $container->userTable->update($validatedBody, $arguments['id']);
 
         return $response->withJson([
             'status' => HttpStatus::OK,
             'success' => 'User has been updated',
         ], HttpStatus::OK);
+    }
+
+    private function emailMustBeUnique($userTable, $email, $identifier)
+    {
+        $user = $userTable->getByEmail($email);
+
+        if ($user && $user['id'] != $identifier) {
+            throw new ApiException('Foxtrot');
+        }
     }
 }
