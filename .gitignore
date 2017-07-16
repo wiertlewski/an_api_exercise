@@ -8,3 +8,5 @@ logs/*
 
 docker/logs/nginx/*
 !docker/logs/nginx/.gitkeep
+
+config/production/*
