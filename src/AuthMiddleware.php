@@ -17,15 +17,15 @@ class AuthMiddleware
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
         if ($this->credentials['authorization'] == 'Basic') {
-            if ($request->getHeader('Authorization')[0] != 'Basic ' . $this->getBasicToken()) {
-                return $response->withJson([
-                    'status' => HttpStatus::UNAUTHORIZED,
-                    'message' => 'Unauthorized Access',
-                ], HttpStatus::UNAUTHORIZED);
+            if ($request->getHeader('Authorization')[0] == 'Basic ' . $this->getBasicToken()) {
+                return $next($request, $response);
             }
         }
 
-        return $next($request, $response);
+        return $response->withJson([
+            'status' => HttpStatus::UNAUTHORIZED,
+            'message' => 'Unauthorized Access',
+        ], HttpStatus::UNAUTHORIZED);
     }
 
     private function getBasicToken()
