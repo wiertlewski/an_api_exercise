@@ -18,6 +18,14 @@ $container['dbHelper'] = function ($container) {
     return new \Arek\Exercise\DbHelper($container->database);
 };
 
+$container['userTable'] = function ($container) {
+    return new \Arek\Exercise\User\Table($container->dbHelper);
+};
+
+$container['userValidator'] = function ($container) {
+    return new \Arek\Exercise\User\Validator();
+};
+
 $container['controller'] = function ($container) {
     return new \Arek\Exercise\Controller($container);
 };
