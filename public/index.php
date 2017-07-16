@@ -41,7 +41,7 @@ $app->add(new \Arek\Exercise\AuthMiddleware($container->credentials));
 
 $app->post('/user', 'controller:User_Create');
 $app->get('/user', 'controller:User_Read');
-$app->put('/user/{id}', 'controller:User_Update');
-$app->delete('/user/{id}', 'controller:User_Delete');
+$app->put('/user/{id:[0-9]+}', 'controller:User_Update');
+$app->delete('/user/{id:[0-9]+}', 'controller:User_Delete');
 
 $app->run();
