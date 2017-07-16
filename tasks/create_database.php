@@ -9,7 +9,7 @@ if (!$host || !$username || !$password) {
     exit();
 }
 
-$pdo = new \Pdo('mysql:host=127.0.0.1;charset=utf8', 'root', 'password', [
+$pdo = new \Pdo("mysql:host=$host;charset=utf8", $username, $password, [
     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
 ]);
 
