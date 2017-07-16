@@ -3,10 +3,18 @@ An API exercise
 
 ## Docker
 
-Run docker-compose to start local development
+Run docker-compose to start local development.
 
 ``` bash
 $ docker-compose up
+```
+
+## Database
+
+Run create_database task to create local (docker) database.
+
+``` bash
+$ php tasks/create_database.php
 ```
 
 ## License
