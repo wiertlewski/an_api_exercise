@@ -37,6 +37,8 @@ $container['logger'] = function ($container) {
     return new \Arek\Exercise\Logger(ROOT_PATH . '/logs/');
 };
 
+$app->add(new \Arek\Exercise\AuthMiddleware($container->credentials));
+
 $app->post('/user', 'controller:User_Create');
 $app->get('/user', 'controller:User_Read');
 $app->put('/user/{id}', 'controller:User_Update');
