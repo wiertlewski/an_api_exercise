@@ -21,9 +21,9 @@ class Read
     private function getData($container, $request)
     {
         if ($request->getParam('id')) {
-            return $container->userTable->getById($request->getParam('id'));
+            return $container->userTable->getById((int) $request->getParam('id'));
         } elseif ($request->getParam('email')) {
-            return $container->userTable->getByEmail($request->getParam('email'));
+            return $container->userTable->getByEmail((string) $request->getParam('email'));
         }
 
         return $container->userTable->get();
