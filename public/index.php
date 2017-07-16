@@ -9,8 +9,11 @@ require ROOT_PATH . '/vendor/autoload.php';
 session_start();
 
 $settings = require ROOT_PATH . '/config/' . APP_ENV . '/settings.php';
+$errors = require ROOT_PATH . '/config/' . 'errors.php';
 
-$app = new \Slim\App($settings);
+$app = new \Slim\App(array_merge($settings, [
+    'errors' => $errors,
+]));
 
 $container = $app->getContainer();
 

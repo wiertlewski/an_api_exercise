@@ -12,6 +12,14 @@ class Create
      */
     public function __invoke($container, $request, $response, $arguments)
     {
+        $validatedBody = $container->userValidator->validate($request->getParsedBody());
+
+        if ($container->userTable->getByEmail($validatedBody['email'])) {
+            throw new ApiException('Foxtrot');
+        }
+
+        $container->userTable->create($validatedBody);
+
         return $response->withJson([
             'status' => HttpStatus::OK,
             'success' => 'User has been created',

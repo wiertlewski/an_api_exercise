@@ -12,6 +12,12 @@ class Delete
      */
     public function __invoke($container, $request, $response, $arguments)
     {
+        if (!$container->userTable->getById($arguments['id'])) {
+            throw new ApiException('Echo');
+        }
+
+        $container->userTable->delete($arguments['id']);
+
         return $response->withJson([
             'status' => HttpStatus::OK,
             'success' => 'User has been deleted',
