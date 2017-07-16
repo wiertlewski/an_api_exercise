@@ -1,3 +1,4 @@
+vendor
 
 docker/databases/*
 !docker/databases/.gitkeep
