@@ -37,6 +37,15 @@ $container['logger'] = function ($container) {
     return new \Arek\Exercise\Logger(ROOT_PATH . '/logs/');
 };
 
+$container['notFoundHandler'] = function ($container) {
+    return function ($request, $response) use ($container) {
+        return $response->withJson([
+            'status' => \Arek\Exercise\HttpStatus::NOT_FOUND,
+            'error' => 'Page not found.',
+        ], \Arek\Exercise\HttpStatus::NOT_FOUND);
+    };
+};
+
 $app->add(new \Arek\Exercise\AuthMiddleware($container->credentials));
 
 $app->post('/user', 'controller:User_Create');
