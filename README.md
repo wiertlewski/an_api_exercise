@@ -1,7 +1,7 @@
 # an_api_exercise
 
 [![Software License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
-[![Build Status](https://api.travis-ci.org/wiertlewski/an_api_exercise.svg?branch=master)](https://travis-ci.org/wiertlewski/an_api_exercise)
+[![Build Status](https://api.travis-ci.org/wiertlewski/an_api_exercise.svg?branch=packsize)](https://travis-ci.org/wiertlewski/an_api_exercise)
 
 An API exercise
 
@@ -35,137 +35,87 @@ Include Authorization basic token with every request.
 $ Authorization: Basic dGVzdGVyOmV4ZXJjaXNl
 ```
 
-## Create User
+## Create Pack Size
 
-Register user API endpoint.
+Add pack size API endpoint.
 
 **Request**
 
-    url: /user,
+    url: /size,
     method: POST,
     headers:
         "Content-Type": "application/x-www-form-urlencoded"
         "Authorization": "Basic dGVzdGVyOmV4ZXJjaXNl"
     payload:
-        "email": "string"
-        "forename": "string"
-        "surname": "string"
+        "size": int
 
 **Example**
 
-[POST] http://localhost/user
+[POST] http://localhost/size
 
-payload: `{ "email": "test@tester.com", "forename": "Test", "surname": "Tester" }`
+payload: `{ "size": 999 }`
 
 **Failures**
 
-* Email field is required and cannot be empty
-* Forename field is required and cannot be empty
-* Surname field is required and cannot be empty
-* Invalid email format
-* Invalid forename. Only letters and white space allowed.
-* Invalid surname. Only letters and white space allowed.
-* User with requested email already exists
+* Pack Size field is required and cannot be empty
+* Invalid size
+* Pack Size already exists
 
-## Read User
+## Read Pack Size
 
-Find user API endpoint.
+Find pack size API endpoint.
 
 **Request**
 
-    url: /user,
+    url: /size,
     method: GET,
     header:
         "Authorization": "Basic dGVzdGVyOmV4ZXJjaXNl"
     params:
         "id": "string"
-        "email": "string"
+        "size": "string"
 
 **Examples**
 
-[GET] http://localhost/user
+[GET] http://localhost/size
 
-[GET] http://localhost/user?id=1
+[GET] http://localhost/size?id=1
 
-[GET] http://localhost/user?email=test@tester.com
+[GET] http://localhost/size?size=999
 
-## Update User
+## Delete Pack Size
 
-Edit user API endpoint.
-
-**Request**
-
-    url: /user/{id},
-    method: PUT,
-    headers:
-        "Content-Type": "application/x-www-form-urlencoded"
-        "Authorization": "Basic dGVzdGVyOmV4ZXJjaXNl"
-    payload:
-        "email": "string"
-        "forename": "string"
-        "surname": "string"
-
-**Example**
-
-[PUT] http://localhost/user/1
-
-payload: `{ "email": "test@tester.com", "forename": "New", "surname": "Tester" }`
-
-**Failures**
-
-* Email field is required and cannot be empty
-* Forename field is required and cannot be empty
-* Surname field is required and cannot be empty
-* Invalid email format
-* Invalid forename. Only letters and white space allowed.
-* Invalid surname. Only letters and white space allowed.
-* User with requested identifier not found
-* User with requested email already exists
-
-## Delete User
-
-Remove user API endpoint.
+Remove pack size API endpoint.
 
 **Request**
 
-    url: /user/{id},
+    url: /size/{id},
     method: DELETE,
     header:
         "Authorization": "Basic dGVzdGVyOmV4ZXJjaXNl"
 
 **Example**
 
-[DELETE] http://localhost/user/1
+[DELETE] http://localhost/size/1
 
 **Failures**
 
-* User with requested identifier not found
+* Pack Size with requested identifier not found
 
-## Vagrant
+## Calculate Number Of Packs
 
-Use vagrant as alternative for local development.
+Find number of packs size API endpoint.
 
-``` bash
-$ cd vagrantfile
-$ vagrant up
-```
+**Request**
 
-Run create_database task to create local (vagrant) database.
+    url: /calculate/{items},
+    method: GET,
+    header:
+        "Authorization": "Basic dGVzdGVyOmV4ZXJjaXNl"
 
-``` bash
-$ php tasks/create_database.php 192.168.79.79 root password
-```
+**Examples**
 
-Point to new host in database config in /config/development/settings.php
-
-```
-'database' => [
-    'host' => '192.168.79.79',
-    'dbname' => 'an_api_exercise',
-    'username' => 'root',
-    'password' => 'password',
-],
-```
+[GET] http://localhost/calculate/1001
 
 ## License
 

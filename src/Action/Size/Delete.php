@@ -1,6 +1,6 @@
 <?php
 
-namespace Arek\Exercise\Action\User;
+namespace Arek\Exercise\Action\Size;
 
 use Arek\Exercise\ApiException;
 use Arek\Exercise\HttpStatus;
@@ -12,15 +12,15 @@ class Delete
      */
     public function __invoke($container, $request, $response, $arguments)
     {
-        if (!$container->userTable->getById($arguments['id'])) {
+        if (!$container->sizeTable->getById($arguments['id'])) {
             throw new ApiException('Echo');
         }
 
-        $container->userTable->delete($arguments['id']);
+        $container->sizeTable->delete($arguments['id']);
 
         return $response->withJson([
             'status' => HttpStatus::OK,
-            'success' => 'User has been deleted',
+            'success' => 'Pack Size has been deleted',
         ], HttpStatus::OK);
     }
 }

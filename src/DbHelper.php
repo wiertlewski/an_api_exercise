@@ -44,18 +44,6 @@ class DbHelper extends \Pdo
         return $this->execute($sql, $data);
     }
 
-    public function update(string $table, array $data, string $key, $value)
-    {
-        $set = implode(', ', array_map(function ($field) {
-            return $field . ' = :' . $field;
-        }, array_keys($data)));
-
-        $sql = sprintf('UPDATE %s SET %s WHERE %3$s = :%3$s;', $table, $set, $key);
-        $data = array_merge($data, array($key => $value));
-
-        return $this->execute($sql, $data);
-    }
-
     public function delete(string $table, string $key, $value)
     {
         $sql = sprintf('DELETE FROM %s WHERE %2$s = :%2$s;', $table, $key);

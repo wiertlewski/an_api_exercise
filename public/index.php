@@ -21,12 +21,12 @@ $container['dbHelper'] = function ($container) {
     return new \Arek\Exercise\DbHelper($container->database);
 };
 
-$container['userTable'] = function ($container) {
-    return new \Arek\Exercise\User\Table($container->dbHelper);
+$container['sizeTable'] = function ($container) {
+    return new \Arek\Exercise\Size\Table($container->dbHelper);
 };
 
-$container['userValidator'] = function ($container) {
-    return new \Arek\Exercise\User\Validator();
+$container['sizeValidator'] = function ($container) {
+    return new \Arek\Exercise\Size\Validator();
 };
 
 $container['controller'] = function ($container) {
@@ -48,9 +48,9 @@ $container['notFoundHandler'] = function ($container) {
 
 $app->add(new \Arek\Exercise\AuthMiddleware($container->credentials));
 
-$app->post('/user', 'controller:User_Create');
-$app->get('/user', 'controller:User_Read');
-$app->put('/user/{id:[0-9]+}', 'controller:User_Update');
-$app->delete('/user/{id:[0-9]+}', 'controller:User_Delete');
+$app->post('/size', 'controller:Size_Create');
+$app->get('/size', 'controller:Size_Read');
+$app->delete('/size/{id:[0-9]+}', 'controller:Size_Delete');
+$app->get('/calculate/{items:[0-9]+}', 'controller:Size_Calculate');
 
 $app->run();

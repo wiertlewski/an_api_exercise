@@ -1,6 +1,6 @@
 <?php
 
-namespace Arek\Exercise\Action\User;
+namespace Arek\Exercise\Action\Size;
 
 use Arek\Exercise\ApiException;
 use Arek\Exercise\HttpStatus;
@@ -12,17 +12,17 @@ class Create
      */
     public function __invoke($container, $request, $response, $arguments)
     {
-        $validatedBody = $container->userValidator->validate($request->getParsedBody());
+        $validatedBody = $container->sizeValidator->validate($request->getParsedBody());
 
-        if ($container->userTable->getByEmail($validatedBody['email'])) {
+        if ($container->sizeTable->getBySize($validatedBody['size'])) {
             throw new ApiException('Foxtrot');
         }
 
-        $container->userTable->create($validatedBody);
+        $container->sizeTable->create($validatedBody);
 
         return $response->withJson([
             'status' => HttpStatus::OK,
-            'success' => 'User has been created',
+            'success' => 'Pack Size has been created',
         ], HttpStatus::OK);
     }
 }

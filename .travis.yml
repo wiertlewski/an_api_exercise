@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - 7.0
+  - 7.1
   - nightly
 
 env:
@@ -14,4 +14,3 @@ before_script:
 script:
   - ./vendor/bin/phpcs ./src --extensions=php --standard=./vendor/humble/standards/ruleset/phpcs.xml
   - ./vendor/bin/phpmd ./src text ./vendor/humble/standards/ruleset/phpmd.xml
-  - ./vendor/bin/phpunit

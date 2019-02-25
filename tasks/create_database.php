@@ -17,16 +17,18 @@ $query = $pdo->prepare("
     DROP DATABASE IF EXISTS an_api_exercise;
     CREATE DATABASE an_api_exercise;
     USE an_api_exercise;
-    CREATE TABLE users (
+    CREATE TABLE sizes (
         id int(10) unsigned NOT NULL AUTO_INCREMENT,
-        email varchar(255) NOT NULL DEFAULT '',
-        forename varchar(255) NOT NULL DEFAULT '',
-        surname varchar(255) NOT NULL DEFAULT '',
-        created int(10) unsigned NOT NULL,
-        updated int(10) unsigned NOT NULL,
+        size int(10) unsigned NOT NULL,
       PRIMARY KEY (id),
-      UNIQUE KEY email (email)
+      UNIQUE KEY size (size)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    INSERT INTO sizes (id, size) VALUES
+        (NULL, '250'),
+        (NULL, '500'),
+        (NULL, '1000'),
+        (NULL, '2000'),
+        (NULL, '5000');
 ");
 
 $query->execute();

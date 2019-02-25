@@ -1,6 +1,6 @@
 <?php
 
-namespace Arek\Exercise\Action\User;
+namespace Arek\Exercise\Action\Size;
 
 use Arek\Exercise\ApiException;
 use Arek\Exercise\HttpStatus;
@@ -21,11 +21,11 @@ class Read
     private function getData($container, $request)
     {
         if ($request->getParam('id')) {
-            return $container->userTable->getById((int) $request->getParam('id'));
-        } elseif ($request->getParam('email')) {
-            return $container->userTable->getByEmail((string) $request->getParam('email'));
+            return $container->sizeTable->getById((int) $request->getParam('id'));
+        } elseif ($request->getParam('size')) {
+            return $container->sizeTable->getBySize((int) $request->getParam('size'));
         }
 
-        return $container->userTable->get();
+        return $container->sizeTable->get();
     }
 }
