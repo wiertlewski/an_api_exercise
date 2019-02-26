@@ -120,6 +120,7 @@ Find number of packs size API endpoint.
 **Failures**
 
 * Pack Sizes not found
+* Minimum one item
 
 ## License
 

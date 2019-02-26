@@ -12,6 +12,12 @@ class Calculate
      */
     public function __invoke($container, $request, $response, $arguments)
     {
+        $items = (int) $arguments['items'];
+
+        if ($items === 0) {
+            throw new ApiException('Delta');
+        }
+
         $sizes = $container->sizeTable->get();
 
         if (empty($sizes)) {
@@ -20,12 +26,11 @@ class Calculate
 
         $sizes = $this->reorderedSizes($sizes);
 
-
         return $response->withJson([
             'status' => HttpStatus::OK,
             'data' => [
-                'items' => (int) $arguments['items'],
-                'packs' => $this->calcPacks($sizes, $arguments['items']),
+                'items' => $items,
+                'packs' => $this->calcPacks($sizes, $items),
             ],
         ], HttpStatus::OK);
     }

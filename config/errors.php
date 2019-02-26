@@ -16,7 +16,11 @@ return [
         'message' => 'Pack Sizes not found.',
         'log' => 'Pack Sizes not found in database',
     ],
-    'Delta' => [],
+    'Delta' => [
+        'status' => 400,
+        'message' => 'Minimum one item.',
+        'log' => 'Items equal to zero',
+    ],
     'Echo' => [
         'status' => 400,
         'message' => 'Pack Size with requested identifier not found.',
