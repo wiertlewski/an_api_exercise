@@ -19,7 +19,7 @@ class Validator
     {
         if (empty($size)) {
             throw new ApiException('Bravo');
-        } elseif (!is_numeric($size)) {
+        } elseif (!is_numeric($size) || $size <= 0) {
             throw new ApiException('Juliet');
         }
     }
