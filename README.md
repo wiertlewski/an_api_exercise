@@ -117,6 +117,10 @@ Find number of packs size API endpoint.
 
 [GET] http://localhost/calculate/1001
 
+**Failures**
+
+* Pack Sizes not found
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

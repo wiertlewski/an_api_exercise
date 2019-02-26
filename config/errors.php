@@ -11,7 +11,11 @@ return [
         'message' => 'Pack Size field is required and cannot be empty.',
         'log' => 'Missing payload: size',
     ],
-    'Charlie' => [],
+    'Charlie' => [
+        'status' => 400,
+        'message' => 'Pack Sizes not found.',
+        'log' => 'Pack Sizes not found in database',
+    ],
     'Delta' => [],
     'Echo' => [
         'status' => 400,

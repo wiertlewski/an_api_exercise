@@ -12,7 +12,14 @@ class Calculate
      */
     public function __invoke($container, $request, $response, $arguments)
     {
-        $sizes = $this->reorderedSizes($container->sizeTable->get());
+        $sizes = $container->sizeTable->get();
+
+        if (empty($sizes)) {
+            throw new ApiException('Charlie');
+        }
+
+        $sizes = $this->reorderedSizes($sizes);
+
 
         return $response->withJson([
             'status' => HttpStatus::OK,
