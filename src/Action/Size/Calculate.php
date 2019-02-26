@@ -39,11 +39,19 @@ class Calculate
     {
         $packs = [];
 
-        foreach ($sizes as $size) {
+        foreach ($sizes as $key => $size) {
+            if ($items <= 0) {
+                break;
+            }
+
             $number = intdiv($items, $size);
+
             if ($number > 0) {
                 $packs[$size] += $number;
-                $items = $items % $size;
+                $items -= $size * $number;
+            } elseif ($this->isBetterThanSmallerSize($sizes, $key, $items)) {
+                $packs[$size] += 1;
+                $items -= $size;
             }
         }
 
@@ -52,6 +60,23 @@ class Calculate
         }
 
         return $packs;
+    }
+
+    private function isBetterThanSmallerSize($sizes, $key, $items)
+    {
+        $i = 1;
+        $nextSize = $sizes[$key + $i] ?? null;
+
+        while ($nextSize) {
+            if ($sizes[$key] - $items >= $items % $nextSize && $sizes[$key] - $items >= $nextSize ) {
+                return false;
+            }
+
+            $i++;
+            $nextSize = $sizes[$key + $i] ?? null;
+        }
+
+        return true;
     }
 
     private function reorderedSizes(array $sizes)
