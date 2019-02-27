@@ -24,69 +24,18 @@ class Calculate
             throw new ApiException('Charlie');
         }
 
-        $sizes = $this->reorderedSizes($sizes);
+        $sizes = array_map(function ($row) {
+            return (int) $row['size'];
+        }, $sizes);
+
+        $packsCalculator = new \Arek\Exercise\PacksCalculator($sizes, $items);
 
         return $response->withJson([
             'status' => HttpStatus::OK,
             'data' => [
                 'items' => $items,
-                'packs' => $this->calcPacks($sizes, $items),
+                'packs' => $packsCalculator->getNumberOfPacks(),
             ],
         ], HttpStatus::OK);
-    }
-
-    private function calcPacks(array $sizes, int $items)
-    {
-        $packs = [];
-
-        foreach ($sizes as $key => $size) {
-            if ($items <= 0) {
-                break;
-            }
-
-            $number = intdiv($items, $size);
-
-            if ($number > 0) {
-                $packs[$size] += $number;
-                $items -= $size * $number;
-            } elseif ($this->isBetterThanSmallerSize($sizes, $key, $items)) {
-                $packs[$size] += 1;
-                $items -= $size;
-            }
-        }
-
-        if ($items > 0) {
-            $packs[$size] += 1;
-        }
-
-        return $packs;
-    }
-
-    private function isBetterThanSmallerSize($sizes, $key, $items)
-    {
-        $i = 1;
-        $nextSize = $sizes[$key + $i] ?? null;
-
-        while ($nextSize) {
-            if ($sizes[$key] - $items >= $items % $nextSize && $sizes[$key] - $items >= $nextSize ) {
-                return false;
-            }
-
-            $i++;
-            $nextSize = $sizes[$key + $i] ?? null;
-        }
-
-        return true;
-    }
-
-    private function reorderedSizes(array $sizes)
-    {
-        $result = array_map(function ($row) {
-            return (int) $row['size'];
-        }, $sizes);
-
-        rsort($result, SORT_NUMERIC);
-
-        return $result;
     }
 }
